@@ -16,7 +16,7 @@ type Later = {
   path: string | null
 }
 
-function ProfilePage({ params }: { params: { username: string } }) {
+function ProfilePage() {
   const [laters, setLaters] = useState<Later[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 

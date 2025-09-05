@@ -57,3 +57,51 @@ export async function getDbUserId() {
 
     return user.id;
 }
+
+export async function addToReadLater(bookData: {
+  googleId: string;
+  title: string;
+  author?: string;
+  path?: string;
+}) {
+    const { userId } = await auth();
+    const dbUserId = await getDbUserId();
+    const book = await prisma.book.upsert({
+        where: { googleId: bookData.googleId },
+        update: {},
+        create: {
+            googleId: bookData.googleId,
+            title: bookData.title,
+            author: bookData.author,
+            path: bookData.path,
+            authorId: dbUserId
+        },
+    });
+
+    await prisma.user.update({
+        where: { clerkId : userId! },
+        data: {
+            readLater: {
+            connect: { id: book.id },
+            },
+        },
+    });
+
+  return book;
+}
+
+export async function getLaters() {
+    try {
+        const { userId: clerkId } = await auth();
+        if (!clerkId) return [];
+
+        const user = await prisma.user.findUnique({
+            where: { clerkId },
+            include: { readLater: true },
+        });
+
+        return user?.readLater ?? [];
+    } catch(error) {
+        console.log("Error fetching watch list", error);
+    }
+}

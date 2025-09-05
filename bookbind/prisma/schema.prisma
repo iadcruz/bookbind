@@ -1,44 +1,36 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
-generator client {
+// This is your Prisma schema file, 
+// learn more about it in the docs: https://pris.ly/d/prisma-schema 
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions? 
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init 
+generator client { 
   provider = "prisma-client-js"
-}
-
+} 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = env("DATABASE_URL")
 }
 
 model User {
-  id String @id @default(cuid())
-  email String @unique
-  username String @unique
-  clerkId String @unique
-  name String?
-  bio String?
-  image String?
-  location String?
+  id        String   @id @default(cuid())
+  email     String   @unique
+  username  String   @unique
+  clerkId   String   @unique
+  name      String?
+  bio       String?
+  image     String?
+  location  String?
   createdAt DateTime @default(now())
 
-  comments Comment[] @relation("comments")
-  watchLater Book[] @relation("later")
-}
-
-model Comment {
-  id String @id @default(cuid())
-  commenters User[] @relation("comments")
+  readLater Book[]  @relation("Later")
 }
 
 model Book {
-  id String @id @default(cuid())
+  id       String   @id @default(cuid())
+  googleId String   @unique
+  title    String
+  author   String?
+  path     String?
   authorId String
-  book String
-  bookId Int @default(0)
-  path String
 
-  User User[] @relation("later")
+  users    User[] @relation("Later")
 }

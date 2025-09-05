@@ -1,6 +1,6 @@
 "use client";
 
-import {BellIcon, HomeIcon, LogOutIcon, MenuIcon, MoonIcon, SunIcon, UserIcon} from "lucide-react";
+import { Library, LogOutIcon, MenuIcon, MoonIcon, SunIcon, UserIcon} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useState } from "react";
@@ -39,19 +39,13 @@ function MobileNavbar() {
             <nav className="flex flex-col space-y-4 mt-6">
               <Button variant="ghost" className="flex items-center gap-3 justify-start" asChild>
                 <Link href="/">
-                  <HomeIcon className="w-4 h-4" />
-                  Home
+                  <Library className="w-4 h-4" />
+                  Library
                 </Link>
               </Button>
   
               {isSignedIn ? (
                 <>
-                  <Button variant="ghost" className="flex items-center gap-3 justify-start" asChild>
-                    <Link href="/notifications">
-                      <BellIcon className="w-4 h-4" />
-                      Notifications
-                    </Link>
-                  </Button>
                   <Button variant="ghost" className="flex items-center gap-3 justify-start" asChild>
                     <Link href="/profile">
                       <UserIcon className="w-4 h-4" />

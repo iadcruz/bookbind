@@ -10,7 +10,7 @@ import {
 } from '@clerk/nextjs'
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import Sidebar from "@/components/Sidebar";
+import { Toaster } from "@/components/ui/sonner"
 import { ThemeProvider } from "next-themes";
 
 const geistSans = Geist({
@@ -50,6 +50,7 @@ export default function RootLayout({
                     {children}
                 </div>
               </main>
+              <Toaster />
             </div>
           </ThemeProvider>
         </body>

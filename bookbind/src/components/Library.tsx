@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useTransition } from "react";
 import { browseBooks, searchBooks } from "@/actions/book.action";
-import { Library } from 'lucide-react';
+import { CircleCheck, CirclePlus, Library } from 'lucide-react';
 import { Button } from "./ui/button";
 import { addToReadLater } from "@/actions/user.action";
 import { toast } from "sonner";
@@ -22,6 +22,7 @@ export default function Browse() {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [isPending, startTransition] = useTransition();
+  const [added, setAdded] = useState<String[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -47,8 +48,15 @@ export default function Browse() {
         googleId: book.id,
         title: book.volumeInfo.title,
         author: book.volumeInfo.authors?.[0],
+        path: book.volumeInfo.imageLinks?.thumbnail
       });
       toast("Added to Reading List!");
+    });
+    setAdded((prev) => {
+        if (!prev.includes(book.id)) {
+        return [...prev, book.id];
+        }
+        return prev;
     });
   };
 
@@ -93,10 +101,10 @@ export default function Browse() {
               </p>
               <Button
                 onClick={() => handleAddLater(book)}
-                disabled={isPending}
-                className="mt-2 bg-green-600 text-white px-3 py-1 rounded-xl w-full"
+                disabled={added.includes(book.id)}
+                className="mt-2 px-3 py-1 rounded-xl w-full"
               >
-                {isPending ? "Adding..." : "➕ Read Later"}
+                {added.includes(book.id) ? <div>Added<CircleCheck className="inline-block size-5 pl-2"/></div> : (isPending ? "Adding..." : <div>Read Later<CirclePlus className="inline-block size-5 pl-2"/></div>)}
               </Button>
             </div>
           ))}

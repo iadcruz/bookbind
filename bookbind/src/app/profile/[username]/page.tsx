@@ -1,6 +1,7 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardTitle } from '@/components/ui/card';
+import { Scroll } from "lucide-react";
 import { ScrollArea } from '@/components/ui/scroll-area';
 import React, { useEffect, useState } from 'react'
 import Image from "next/image";
@@ -45,56 +46,47 @@ function ProfilePage({ params }: { params: { username: string } }) {
   }
 
   return (
-    <div>
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle>Reading List</CardTitle>
-          </div>
-        </CardHeader>
-      </Card>
-
-      <ScrollArea className="h-[calc(100vh-12rem)] pt-2">
+    <div className="p-6">
+        <h1 className="text-2xl font-bold mb-4"><Scroll className="inline size-10 pr-2 pb-2"/>Reading List</h1>
         <div className="grid grid-cols-3 gap-2">
-          {laters.length === 0 ? (
+        {laters.length === 0 ? (
             <div className="p-4 text-center text-muted-foreground">
-              No books added yet!
+            No books added yet!
             </div>
-          ) : (
+        ) : (
             laters.map((later) => (
-              <div key={later.id} className="lg:col-span-1">
+            <div key={later.id} className="lg:col-span-1">
                 <Card className="h-full flex flex-col">
-                  <div className="p-4 flex-1 flex flex-col justify-between text-center">
+                <div className="p-4 flex-1 flex flex-col justify-between text-center">
                     {later.path ? (
-                      <Image
-                        src={`https://books.google.com/books/content?id=${later.googleId}&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api`}
+                    <Image
+                        src={later.path}
                         width={200}
                         height={300}
                         alt={`${later.title} cover`}
                         className="object-cover mx-auto"
-                      />
+                    />
                     ) : (
-                      <div className="h-[300px] flex items-center justify-center bg-muted text-muted-foreground">
+                    <div className="h-[300px] flex items-center justify-center bg-muted text-muted-foreground">
                         No cover
-                      </div>
+                    </div>
                     )}
                     <div className="mt-2">
-                      <CardTitle className="text-lg font-semibold line-clamp-2">
+                    <CardTitle className="text-lg font-semibold line-clamp-2">
                         {later.title}
-                      </CardTitle>
-                      {later.author && (
+                    </CardTitle>
+                    {later.author && (
                         <p className="text-sm text-muted-foreground mt-1">
-                          {later.author}
+                        {later.author}
                         </p>
-                      )}
+                    )}
                     </div>
-                  </div>
+                </div>
                 </Card>
-              </div>
+            </div>
             ))
-          )}
+        )}
         </div>
-      </ScrollArea>
     </div>
   )
 }

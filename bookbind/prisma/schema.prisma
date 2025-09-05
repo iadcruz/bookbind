@@ -25,9 +25,20 @@ model User {
   createdAt DateTime @default(now())
 
   comments Comment[] @relation("comments")
+  watchLater Book[] @relation("later")
 }
 
 model Comment {
   id String @id @default(cuid())
   commenters User[] @relation("comments")
+}
+
+model Book {
+  id String @id @default(cuid())
+  authorId String
+  book String
+  bookId Int @default(0)
+  path String
+
+  User User[] @relation("later")
 }

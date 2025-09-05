@@ -12,7 +12,7 @@ BookBind is an app that allows users to browse popular books, filter by keyword,
 
 ## Time Spent
 
-This project took me ~4 hours to complete. Given more time, there are many other features/improvements I would like to implement, including but not limited to comment sections on books (where users can leave their reviews), follower capabilities (so that friends can follow each other and see what books their friends are reading), and more customizable reading lists (ability to remove from the list or prioritize different books).
+This project took me ~5 hours to complete. Given more time, there are many other features/improvements I would like to implement, including but not limited to comment sections on books (where users can leave their reviews), follower capabilities (so that friends can follow each other and see what books their friends are reading), and more customizable reading lists (ability to remove from the list or prioritize different books).
 
 ## Running the Project
 

@@ -22,7 +22,7 @@ export default function Browse() {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [isPending, startTransition] = useTransition();
-  const [added, setAdded] = useState<String[]>([]);
+  const [added, setAdded] = useState<string[]>([]);
 
   useEffect(() => {
     (async () => {

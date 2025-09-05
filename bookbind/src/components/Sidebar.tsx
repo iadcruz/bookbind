@@ -39,17 +39,6 @@ async function Sidebar() {
 
             <div className="w-full">
               <Separator className="my-4" />
-              <div className="flex justify-between">
-                <div>
-                  <p className="font-medium">{user._count.following}</p>
-                  <p className="text-xs text-muted-foreground">Following</p>
-                </div>
-                <Separator orientation="vertical" />
-                <div>
-                  <p className="font-medium">{user._count.followers}</p>
-                  <p className="text-xs text-muted-foreground">Followers</p>
-                </div>
-              </div>
             </div>
           </div>
         </CardContent>
